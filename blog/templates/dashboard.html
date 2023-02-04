@@ -1,0 +1,77 @@
+{% extends 'home.html'%}
+{% block body %}
+{% load static %}
+      <div class="search-container">
+    <form method="post">
+      {% csrf_token%}
+      <input type="text" placeholder="Search.." name="search" style="margin-left: 16px;padding: 6px;margin-top: 8px;font-size: 17px;border: none;width:1300px;">
+      <button type="submit" style="
+        padding: 6px 10px;
+        margin-top: 8px;
+        margin-right: 50px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+
+<br><br>
+{% if data %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for i in data %}
+  <div class="col">
+    <div class="card h-100">
+      <img src='{{i.image}}' class="card-img-top" width="150px" height="200px" alt="Hollywood Sign on The Hill" />
+      <div class="card-body" style="height:300px;text-align: justify;">
+        <div>
+          <span class="float-start badge rounded-pill bg-info">Topic: {{i.Topic}}</span>
+          <span class="float-end price-hp">last modified:{{i.updated_date|date:"d M Y"}}</span>
+        </div><br><br>
+
+        <h5 class="card-title">{{i.caption}}</h5>
+        <p class="card-text">
+          {{i.blog_data|truncatewords:40}}<a href="details/{{i.id}}" style="color:blue;">viewmore</a>
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button type="submit" style="background-color:blue;color:white;padding:2px;width:150px;float:left;" ><a href="update/{{i.id}}" style="color:white">Update</a></button>&nbsp;
+          <button type="submit" style="background-color:blue;color:white;padding:2px;width:150px;float:right;"><a href="delete/{{i.id}}" style="color:white">Delete</a></button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for i in userdata %}
+  <div class="col">
+    <div class="card h-100">
+      <img src='{{i.image}}' class="card-img-top" width="150px" height="200px" alt="Hollywood Sign on The Hill" />
+      <div class="card-body" style="height:300px;text-align: justify;">
+        <div>
+          <span class="float-start badge rounded-pill bg-info">Topic: {{i.Topic}}</span>
+          <span class="float-end price-hp">last modified: {{i.updated_date|date:"d M Y"}}</span>
+        </div><br><br>
+
+        <h5 class="card-title">{{i.caption}}</h5>
+        <p class="card-text">
+          {{i.blog_data|truncatewords:40}}<a href="details/{{i.id}}" style="color:blue;">viewmore</a>
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button type="submit" style="background-color:blue;color:white;padding:2px;width:150px;float:left;" ><a href="update/{{i.id}}" style="color:white">Update</a></button>&nbsp;
+          <button type="submit" style="background-color:blue;color:white;padding:2px;width:150px;float:right;"><a href="delete/{{i.id}}" style="color:white">Delete</a></button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
