@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'blogs',
         'USER' : 'root',
         'PASSWORD' : '',
-        'HOST': 'localhost'
+        'HOST': 'http://darsana.pythonanywhere.com/'
     }
 }
 
